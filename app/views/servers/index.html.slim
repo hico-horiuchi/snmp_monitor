@@ -1,4 +1,4 @@
-- @title = 'サーバー管理'
+- @title = 'サーバ管理'
 
 h3.bold #{@title}
 
@@ -9,6 +9,6 @@ h3.bold #{@title}
 p
 
 - if @servers.empty?
-  p サーバーが登録されていません。
+  p サーバが登録されていません。
 - else
   = render partial: 'servers/list'

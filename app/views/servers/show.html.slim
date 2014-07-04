@@ -1,0 +1,17 @@
+- @title = "サーバーの詳細情報"
+
+h3.bold #{@title}
+
+.row
+  .col-md-3
+    .graph-area
+      h4.bold.center CPU使用率
+      = high_chart 'cpu_usage', @cpu_usage
+  .col-md-3
+    .graph-area
+      h4.bold.center メモリー使用率
+      = high_chart 'memory_usage', @memory_usage
+  .col-md-3
+    .graph-area
+      h4.bold.center 消費電力
+      = high_chart 'power_usage', @power_usage

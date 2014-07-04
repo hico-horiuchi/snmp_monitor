@@ -173,6 +173,7 @@ GEM
       railties (>= 3.0, < 4.2)
       slim (~> 2.0)
     slop (3.5.0)
+    snmp (1.1.1)
     spring (1.1.3)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -224,6 +225,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   slim-rails
+  snmp
   spring
   therubyracer
   turbolinks

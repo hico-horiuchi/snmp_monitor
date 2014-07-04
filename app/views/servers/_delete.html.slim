@@ -2,7 +2,7 @@
 
 - modal_body = capture do
   p
-    | サーバー「#{@server.ip_address}」を削除しますか?
+    | サーバ「#{@server.ip_address}」を削除しますか?
 
 - modal_footer = capture do
   = link_to server_path(@server.id), class: 'btn btn-danger', remote: true, method: :delete do

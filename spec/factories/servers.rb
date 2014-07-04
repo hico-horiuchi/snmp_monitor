@@ -17,5 +17,10 @@
 
 FactoryGirl.define do
   factory :server do
+    ip_address      'localhost'
+    community       'public'
+    max_cpu_core    6
+    assign_cpu_core 1
+    cpu_tdp         95
   end
 end

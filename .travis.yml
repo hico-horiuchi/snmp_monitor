@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.1.2
+bundler_args: --without development
+env:
+  - DB=postgresql
+before_script:
+  - cp config/database.yml.travis config/database.yml
+script:
+  - bundle exec rake db:drop db:create db:migrate db:seed
+  - bundle exec rake spec
+notifications:
+  email: false

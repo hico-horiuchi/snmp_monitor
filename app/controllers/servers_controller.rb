@@ -69,6 +69,7 @@ class ServersController < ApplicationController
       f.title text: title, verticalAlign: 'middle', floating: true
       f.series name: "#{factor} Usage", data: [['Busy', usage], ['Idle', 100 - usage]]
       f.legend enabled: false
+      f.tooltip enabled: false
     end
   end
 

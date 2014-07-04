@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704075426) do
+ActiveRecord::Schema.define(version: 20140704094824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "servers", force: true do |t|
+    t.integer  "user_id",         default: 0,  null: false
+    t.string   "ip_address",      default: "", null: false
+    t.string   "community",       default: "", null: false
+    t.integer  "max_cpu_core",    default: 0,  null: false
+    t.integer  "assign_cpu_core", default: 0,  null: false
+    t.integer  "cpu_tdp",         default: 0,  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",              default: "", null: false

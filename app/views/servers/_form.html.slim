@@ -1,0 +1,36 @@
+- unless @server
+  - @server = Server.new
+  - @title = '新規登録'
+  - @button_caption = '登録'
+- else
+  - @title = '編集'
+  - @button_caption = '更新'
+
+= form_for @server, html: { class: 'form-horizontal', multipart: true }, remote: true do |f|
+  - modal_body = capture do
+    .form-group
+      = f.label :ip_address, 'IPアドレス', class: 'col-md-3 control-label'
+      .col-md-5
+        = f.text_field :ip_address, autofocus: true, class: 'form-control'
+    .form-group
+      = f.label :community, 'コミュニティ名', class: 'col-md-3 control-label'
+      .col-md-5
+        = f.text_field :community, autofocus: true, class: 'form-control'
+    .form-group
+      = f.label :max_cpu_core, '最大CPUコア数', class: 'col-md-3 control-label'
+      .col-md-5
+        = f.text_field :max_cpu_core, autofocus: true, class: 'form-control'
+    .form-group
+      = f.label :assign_cpu_core, '割当CPUコア数', class: 'col-md-3 control-label'
+      .col-md-5
+        = f.text_field :assign_cpu_core, autofocus: true, class: 'form-control'
+    .form-group
+      = f.label :cpu_tdp, 'CPU消費電力', class: 'col-md-3 control-label'
+      .col-md-5
+        = f.text_field :cpu_tdp, autofocus: true, class: 'form-control'
+
+  - modal_footer = capture do
+    = f.submit @button_caption, class: 'btn btn-primary'
+    = content_tag :button, "キャンセル", class: 'btn btn-default', 'data-dismiss' => 'modal'
+
+  - modal_dialog :id => "modal-form", :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer

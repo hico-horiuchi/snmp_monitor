@@ -19,10 +19,15 @@ html
             span.icon-bar
             span.icon-bar
           = link_to root_path, class: "navbar-brand" do
-            | Monitor
+            = image_tag 'logo.png', class: 'navbar-logo'
 
         .collapse.navbar-collapse id="bs-example-navbar-collapse-1"
           - if current_user
+            ul.nav.navbar-nav
+              li
+                = link_to servers_path do
+                  span.glyphicon.glyphicon-hdd
+                  | &nbsp;サーバー
             ul.nav.navbar-nav.navbar-right
               li.dropdown
                 a.dropdown-toggle href="#" data-toggle="dropdown"
@@ -48,6 +53,5 @@ html
           button.close type="button" data-dismiss="alert" aria-hidden="true" &times;
           = alert
       = yield
-      footer
-        br
+      footer.right
         p Copyright &copy; hico_horiuchi. All Rights Reserved.

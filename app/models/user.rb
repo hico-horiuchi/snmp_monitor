@@ -14,5 +14,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :validatable
          # :recoverable, :rememberable, :trackable
-  scope :id_is, -> ( id ) { where(id: id).first }
+  scope :id_is, -> ( id ) { where( id: id ).first }
+  has_many :servers
 end

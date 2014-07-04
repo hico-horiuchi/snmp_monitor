@@ -1,0 +1,12 @@
+- @title = '削除'
+
+- modal_body = capture do
+  p
+    | サーバー「#{@server.ip_address}」を削除しますか?
+
+- modal_footer = capture do
+  = link_to server_path(@server.id), class: 'btn btn-danger', remote: true, method: :delete do
+    | 削除
+  = content_tag :button, 'キャンセル', class: 'btn btn-default', 'data-dismiss' => 'modal'
+
+= modal_dialog :id => 'modal-form', :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer

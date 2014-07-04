@@ -6,12 +6,40 @@ h3.bold #{@title}
   .col-md-3
     .graph-area
       h4.bold.center CPU使用率
-      = high_chart 'cpu_usage', @cpu_usage
+      - if @cpu_usage.nil?
+        h4.center SNMP接続エラー
+      - else
+        = high_chart 'cpu_usage', @cpu_usage
   .col-md-3
     .graph-area
       h4.bold.center メモリー使用率
-      = high_chart 'memory_usage', @memory_usage
+      - if @memory_usage.nil?
+        h4.center SNMP接続エラー
+      - else
+        = high_chart 'memory_usage', @memory_usage
   .col-md-3
     .graph-area
       h4.bold.center 消費電力
-      = high_chart 'power_usage', @power_usage
+      - if @power_usage.nil?
+        h4.center SNMP接続エラー
+      - else
+        = high_chart 'power_usage', @power_usage
+  .col-md-3
+    .table-responsive
+      table.table.table-condensed.table-bordered
+        tbody
+          tr
+            th IPアドレス
+            td #{@server.ip_address}
+          tr
+            th コミュニティ名
+            td #{@server.community}
+          tr
+            th 最大CPUコア数
+            td #{@server.max_cpu_core}
+          tr
+            th 割当CPUコア数
+            td #{@server.assign_cpu_core}
+          tr
+            th CPU消費電力
+            td #{@server.cpu_tdp}W

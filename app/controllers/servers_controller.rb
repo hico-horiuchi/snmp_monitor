@@ -9,14 +9,24 @@ class ServersController < ApplicationController
   def show
     @manager = SNMP::Manager.new( host: @server.ip_address, community: @server.community )
 
-    cpu_usage = get_cpu_usage * 100
-    @cpu_usage = make_usage_graph( 'CPU',  "#{sprintf( '%.2f', cpu_usage )}%", cpu_usage, '#da4f49' )
+    cpu_usage = get_cpu_usage
+    if cpu_usage.nil?
+      @cpu_usage = nil
+      @power_usage = nil
+    else
+      cpu_usage *= 100
+      @cpu_usage = make_usage_graph( 'CPU',  "#{sprintf( '%.2f', cpu_usage )}%", cpu_usage, '#da4f49' )
+      power_usage = @server.cpu_tdp / @server.max_cpu_core * @server.assign_cpu_core * cpu_usage / 100
+      @power_usage = make_usage_graph( 'Power', "#{sprintf( '%.2f', power_usage )}W", power_usage / @server.cpu_tdp * 100, '#faa732' )
+    end
 
-    memory_usage = get_memory_usage * 100
-    @memory_usage = make_usage_graph( 'MEMORY',  "#{sprintf( '%.2f', memory_usage )}%", memory_usage, '#5bb75b' )
-
-    power_usage = @server.cpu_tdp / @server.max_cpu_core * @server.assign_cpu_core * cpu_usage / 100
-    @power_usage = make_usage_graph( 'Power', "#{sprintf( '%.2f', power_usage )}W", power_usage / @server.cpu_tdp * 100, '#faa732' )
+    memory_usage = get_memory_usage
+    if memory_usage.nil?
+      @memory_usage = nil
+    else
+      memory_usage *= 100
+      @memory_usage = make_usage_graph( 'MEMORY',  "#{sprintf( '%.2f', memory_usage )}%", memory_usage, '#5bb75b' )
+    end
   end
 
   def new
@@ -74,23 +84,31 @@ class ServersController < ApplicationController
   end
 
   def get_cpu_usage
-    # la_load_1 = 0
-    # response = @manager.get( ['1.3.6.1.4.1.2021.10.1.3.1'] )
-    # response.each_varbind { |vb| la_load_1 = vb.value.to_f }
-    # la_load_1 > @server.assign_cpu_core ? 1.0 : la_load_1
-    0.35
+    la_load_1 = 0
+    begin
+      # response = @manager.get( ['1.3.6.1.4.1.2021.10.1.3.1'] )
+      # response.each_varbind { |vb| la_load_1 = vb.value.to_f }
+      # la_load_1 > @server.assign_cpu_core ? 1.0 : la_load_1
+      0.35
+    rescue SNMP::RequestTimeout, NoMethodError
+      nil
+    end
   end
 
   def get_memory_usage
     mem_total_real = 0, mem_avail_real = 0, mem_buffer = 0, mem_cached = 0
-    response = @manager.get( ['1.3.6.1.4.1.2021.4.5.0'] )
-    response.each_varbind { |vb| mem_total_real = vb.value.to_f }
-    response = @manager.get( ['1.3.6.1.4.1.2021.4.6.0'] )
-    response.each_varbind { |vb| mem_avail_real = vb.value.to_f }
-    response = @manager.get( ['1.3.6.1.4.1.2021.4.14.0'] )
-    response.each_varbind { |vb| mem_buffer = vb.value.to_f }
-    response = @manager.get( ['1.3.6.1.4.1.2021.4.15.0'] )
-    response.each_varbind { |vb| mem_cached = vb.value.to_f }
-    ( mem_total_real - mem_avail_real - mem_buffer - mem_cached ) / mem_total_real
+    begin
+      response = @manager.get( ['1.3.6.1.4.1.2021.4.5.0'] )
+      response.each_varbind { |vb| mem_total_real = vb.value.to_f }
+      response = @manager.get( ['1.3.6.1.4.1.2021.4.6.0'] )
+      response.each_varbind { |vb| mem_avail_real = vb.value.to_f }
+      response = @manager.get( ['1.3.6.1.4.1.2021.4.14.0'] )
+      response.each_varbind { |vb| mem_buffer = vb.value.to_f }
+      response = @manager.get( ['1.3.6.1.4.1.2021.4.15.0'] )
+      response.each_varbind { |vb| mem_cached = vb.value.to_f }
+      ( mem_total_real - mem_avail_real - mem_buffer - mem_cached ) / mem_total_real
+    rescue SNMP::RequestTimeout, NoMethodError
+      nil
+    end
   end
 end

@@ -10,6 +10,16 @@ RSpec.describe ServersController, :type => :controller do
     it { expect( response ).to be_success }
   end
 
+  describe '#show' do
+    before do
+      sign_in FactoryGirl.create( :user )
+      server = FactoryGirl.create( :server )
+      get :show, id: server.id
+    end
+    it { expect( response ).to render_template :show }
+    it { expect( response ).to be_success }
+  end
+
   describe '#new' do
     before do
       sign_in FactoryGirl.create( :user )

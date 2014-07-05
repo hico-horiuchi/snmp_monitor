@@ -11,6 +11,8 @@
 //= depend_on_asset "fontawesome-webfont.svg"
 
 @import "twitter/bootstrap/bootstrap";
+@import "bootswatch/variables.less";
+@import "bootswatch/bootswatch.less";
 
 // Set the correct sprite paths
 @iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
@@ -40,25 +42,19 @@
 // Example:
 // @link-color: #ff0000;
 
-body {
-  padding-top: 60px;
-  background-image: url('transp_bg.png');
-  background-repeat: repeat;
-}
+body { padding-top: 60px; }
 .bold { font-weight: bold; }
 .center { text-align: center; }
 .right { text-align: right; }
-.red { color: '#da4f49' }
-.table { background-color: white; }
 .navbar-logo {
   height: 24px;
   positioon: absolute;
   margin-top: -4px;
 }
 .graph-area {
-  background-color: white;
+  background-color: @btn-default-bg;
   padding: 10px;
-  border: 1px solid #e3e3e3;
+  border: 1px solid @btn-default-border;
   border-radius: 6px;
   margin-bottom: 10px;
 }

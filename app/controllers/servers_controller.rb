@@ -18,9 +18,9 @@ class ServersController < ApplicationController
       @power_usage = nil
     else
       load_average *= 100
-      @load_average = usage_graph( 'LoadAverage',  "#{sprintf( '%.2f', load_average )}%", load_average, '#da4f49' )
+      @load_average = usage_graph( 'LoadAverage',  "#{sprintf( '%.2f', load_average )}%", load_average, '#cc0000' )
       power_usage = @server.cpu_tdp / @server.max_cpu_core * @server.assign_cpu_core * load_average / 100
-      @power_usage = usage_graph( 'Power', "#{sprintf( '%.2f', power_usage )}W", power_usage / @server.cpu_tdp * 100, '#faa732' )
+      @power_usage = usage_graph( 'Power', "#{sprintf( '%.2f', power_usage )}W", power_usage / @server.cpu_tdp * 100, '#ff8800' )
     end
 
     memory_usage = get_memory_usage
@@ -28,7 +28,7 @@ class ServersController < ApplicationController
       @memory_usage = nil
     else
       memory_usage *= 100
-      @memory_usage = usage_graph( 'Memory',  "#{sprintf( '%.2f', memory_usage )}%", memory_usage, '#5bb75b' )
+      @memory_usage = usage_graph( 'Memory',  "#{sprintf( '%.2f', memory_usage )}%", memory_usage, '#77b300' )
     end
   end
 

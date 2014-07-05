@@ -7,21 +7,21 @@ h3.bold #{@title}
     .graph-area
       h4.bold.center ロードアベレージ
       - if @load_average.nil?
-        h4.center.red エラー
+        h4.center.text-danger エラー
       - else
         = high_chart 'load_average', @load_average
   .col-md-3
     .graph-area
       h4.bold.center メモリー使用率
       - if @memory_usage.nil?
-        h4.center.red エラー
+        h4.center.text-danger エラー
       - else
         = high_chart 'memory_usage', @memory_usage
   .col-md-3
     .graph-area
       h4.bold.center 消費電力
       - if @power_usage.nil?
-        h4.center.red エラー
+        h4.center.text-danger エラー
       - else
         = high_chart 'power_usage', @power_usage
   .col-md-3

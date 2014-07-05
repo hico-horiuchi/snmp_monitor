@@ -19,7 +19,7 @@ h3.bold #{@title}
         = high_chart 'memory_usage', @memory_usage
   .col-md-3
     .graph-area
-      h4.bold.center 消費電力
+      h4.bold.center 消費電力予測
       - if @power_usage.nil?
         h4.center.text-danger エラー
       - else
@@ -41,5 +41,5 @@ h3.bold #{@title}
             th 割当CPUコア数
             td #{@server.assign_cpu_core}
           tr
-            th CPU消費電力
+            th CPU TDP
             td #{@server.cpu_tdp}W

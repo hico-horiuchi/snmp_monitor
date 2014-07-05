@@ -60,20 +60,32 @@ body { padding-top: 60px; }
 .btn-new {
   margin: 17px 0 0 17px;
 }
-.server-area {
-  background-color: @btn-default-bg;
+.server-area, .server-area:hover,
+.graph-area, graph-area:hover {
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+.server-area, .server-area:hover {
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px;
   width: 240px;
   height: 240px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
-.graph-area {
+.graph-area, graph-area:hover {
   background-color: @btn-default-bg;
   padding: 10px;
-  border: 1px solid @btn-default-border;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
   margin-bottom: 10px;
+}
+.server-area, .graph-area {
+  background-color: @gray-dark;
+}
+.server-area:hover, .graph-area:hover {
+  background-color: @gray;
 }

@@ -1,12 +1,12 @@
 - @title = 'サーバ管理'
 
-h3.bold #{@title}
+h3.bold.float-left #{@title}
 
-= link_to new_server_path, class: 'btn btn-primary', remote: true do
+= link_to new_server_path, class: 'btn btn-primary btn-sm btn-new', remote: true do
   span.glyphicon.glyphicon-plus
   | &nbsp;新規登録
 
-p
+p.float-clear
 
 - if @servers.empty?
   p サーバが登録されていません。

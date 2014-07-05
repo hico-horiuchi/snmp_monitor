@@ -46,15 +46,34 @@ body { padding-top: 60px; }
 .bold { font-weight: bold; }
 .center { text-align: center; }
 .right { text-align: right; }
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+.float-left { float: left; }
+.float-clear { clear: both; }
 .navbar-logo {
   height: 24px;
   positioon: absolute;
   margin-top: -4px;
 }
+.btn-new {
+  margin: 17px 0 0 17px;
+}
+.server-area {
+  background-color: @btn-default-bg;
+  width: 240px;
+  height: 240px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
 .graph-area {
   background-color: @btn-default-bg;
   padding: 10px;
   border: 1px solid @btn-default-border;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
   border-radius: 6px;
   margin-bottom: 10px;
 }

@@ -1,23 +1,16 @@
-.table-responsive
-  table.table.table-condensed.table-bordered
-    thead
-      th
-      th IPアドレス
-      th コミュニティ
-    tbody
-      - @servers.each do |server|
-        tr
-          td
-            = link_to edit_server_path( server.id ), class: "btn btn-success btn-xs", remote: true do
-              span.glyphicon.glyphicon-pencil
-              | &nbsp;編集
-            | &nbsp;
-            = link_to delete_server_path( server.id ), class: "btn btn-danger btn-xs", remote: true do
-              span.glyphicon.glyphicon-remove
-              | &nbsp;削除
-          td
-            = link_to server_path( server.id ) do
-              span.glyphicon.glyphicon-stats
-              | &nbsp;#{server.ip_address}
-          td
-            = server.community
+.row
+  - @servers.each do |server|
+    .col-md-3 style="padding: 10px;"
+      .server-area.center.middle
+        h4.bold #{server.ip_address}
+        = link_to edit_server_path( server.id ), class: "btn btn-success btn-xs", remote: true do
+          span.glyphicon.glyphicon-pencil
+          | &nbsp;編集
+        | &nbsp;
+        = link_to delete_server_path( server.id ), class: "btn btn-danger btn-xs", remote: true do
+          span.glyphicon.glyphicon-remove
+          | &nbsp;削除
+        | &nbsp;
+        = link_to server_path( server.id ), class: "btn btn-warning btn-xs" do
+          span.glyphicon.glyphicon-stats
+          | &nbsp;グラフ

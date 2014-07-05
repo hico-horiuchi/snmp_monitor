@@ -5,23 +5,23 @@ h3.bold #{@title}
 .row
   .col-md-3
     .graph-area
-      h4.bold.center CPU使用率
-      - if @cpu_usage.nil?
-        h4.center SNMP接続エラー
+      h4.bold.center ロードアベレージ
+      - if @load_average.nil?
+        h4.center.red エラー
       - else
-        = high_chart 'cpu_usage', @cpu_usage
+        = high_chart 'load_average', @load_average
   .col-md-3
     .graph-area
       h4.bold.center メモリー使用率
       - if @memory_usage.nil?
-        h4.center SNMP接続エラー
+        h4.center.red エラー
       - else
         = high_chart 'memory_usage', @memory_usage
   .col-md-3
     .graph-area
       h4.bold.center 消費電力
       - if @power_usage.nil?
-        h4.center SNMP接続エラー
+        h4.center.red エラー
       - else
         = high_chart 'power_usage', @power_usage
   .col-md-3

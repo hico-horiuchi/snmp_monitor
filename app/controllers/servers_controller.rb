@@ -2,22 +2,25 @@ class ServersController < ApplicationController
   before_action :load_server
   before_action :authenticate_user!
 
+  include MonitorTool
+  include GraphTool
+
   def index
     @servers = current_user.servers
   end
 
   def show
-    @manager = SNMP::Manager.new( host: @server.ip_address, community: @server.community )
+    snmp_init( @server.ip_address, @server.community )
 
-    cpu_usage = get_cpu_usage
-    if cpu_usage.nil?
-      @cpu_usage = nil
+    load_average = get_load_average
+    if load_average.nil?
+      @load_average = nil
       @power_usage = nil
     else
-      cpu_usage *= 100
-      @cpu_usage = make_usage_graph( 'CPU',  "#{sprintf( '%.2f', cpu_usage )}%", cpu_usage, '#da4f49' )
-      power_usage = @server.cpu_tdp / @server.max_cpu_core * @server.assign_cpu_core * cpu_usage / 100
-      @power_usage = make_usage_graph( 'Power', "#{sprintf( '%.2f', power_usage )}W", power_usage / @server.cpu_tdp * 100, '#faa732' )
+      load_average *= 100
+      @load_average = usage_graph( 'LoadAverage',  "#{sprintf( '%.2f', load_average )}%", load_average, '#da4f49' )
+      power_usage = @server.cpu_tdp / @server.max_cpu_core * @server.assign_cpu_core * load_average / 100
+      @power_usage = usage_graph( 'Power', "#{sprintf( '%.2f', power_usage )}W", power_usage / @server.cpu_tdp * 100, '#faa732' )
     end
 
     memory_usage = get_memory_usage
@@ -25,7 +28,7 @@ class ServersController < ApplicationController
       @memory_usage = nil
     else
       memory_usage *= 100
-      @memory_usage = make_usage_graph( 'MEMORY',  "#{sprintf( '%.2f', memory_usage )}%", memory_usage, '#5bb75b' )
+      @memory_usage = usage_graph( 'Memory',  "#{sprintf( '%.2f', memory_usage )}%", memory_usage, '#5bb75b' )
     end
   end
 
@@ -70,45 +73,5 @@ class ServersController < ApplicationController
 
   def server_params
     params.require( :server ).permit( :ip_address, :community, :max_cpu_core, :assign_cpu_core, :cpu_tdp )
-  end
-
-  def make_usage_graph( factor, title, usage, color )
-    LazyHighCharts::HighChart.new('graph') do |f|
-      f.chart type: 'pie'
-      f.plotOptions pie: { innerSize: '70%', colors: [color, '#393939'], dataLabels: { enabled: false } }
-      f.title text: title, verticalAlign: 'middle', floating: true
-      f.series name: "#{factor} Usage", data: [['Busy', usage], ['Idle', 100 - usage]]
-      f.legend enabled: false
-      f.tooltip enabled: false
-    end
-  end
-
-  def get_cpu_usage
-    la_load_1 = 0
-    begin
-      # response = @manager.get( ['1.3.6.1.4.1.2021.10.1.3.1'] )
-      # response.each_varbind { |vb| la_load_1 = vb.value.to_f }
-      # la_load_1 > @server.assign_cpu_core ? 1.0 : la_load_1
-      0.35
-    rescue SNMP::RequestTimeout, NoMethodError
-      nil
-    end
-  end
-
-  def get_memory_usage
-    mem_total_real = 0, mem_avail_real = 0, mem_buffer = 0, mem_cached = 0
-    begin
-      response = @manager.get( ['1.3.6.1.4.1.2021.4.5.0'] )
-      response.each_varbind { |vb| mem_total_real = vb.value.to_f }
-      response = @manager.get( ['1.3.6.1.4.1.2021.4.6.0'] )
-      response.each_varbind { |vb| mem_avail_real = vb.value.to_f }
-      response = @manager.get( ['1.3.6.1.4.1.2021.4.14.0'] )
-      response.each_varbind { |vb| mem_buffer = vb.value.to_f }
-      response = @manager.get( ['1.3.6.1.4.1.2021.4.15.0'] )
-      response.each_varbind { |vb| mem_cached = vb.value.to_f }
-      ( mem_total_real - mem_avail_real - mem_buffer - mem_cached ) / mem_total_real
-    rescue SNMP::RequestTimeout, NoMethodError
-      nil
-    end
   end
 end

@@ -40,7 +40,7 @@ class ServersController < ApplicationController
     @server = current_user.servers.create( server_params )
     @result = @server.save
     @server = nil unless @result
-    flash[:notice] = '登録しました。' if @result
+    flash[:notice] = 'You registered server successfully.' if @result
   end
 
   def edit
@@ -50,7 +50,7 @@ class ServersController < ApplicationController
   def update
     @result = @server.update( server_params )
     @server = nil unless @result
-    flash[:notice] = '更新しました。' if @result
+    flash[:notice] = 'You updated server successfully.' if @result
   end
 
   def delete
@@ -60,8 +60,8 @@ class ServersController < ApplicationController
   def destroy
     @result = @server.destroy
     @server = nil unless @result
-    flash[:notice] = '削除しました。' if @result
-    flash[:alert] = '削除できませんでした。' unless @result
+    flash[:notice] = 'You deleted server successfully.' if @result
+    flash[:alert] = 'You could not delete server.' unless @result
     render :reload
   end
 

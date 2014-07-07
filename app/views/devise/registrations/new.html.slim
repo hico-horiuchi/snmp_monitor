@@ -1,4 +1,4 @@
-- @title = '新規登録'
+- @title = 'Sign up'
 
 h3.bold #{@title}
 
@@ -10,17 +10,17 @@ h3.bold #{@title}
 .well
   = form_for resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal' } do |f|
     .form-group
-      = f.label :email, 'メールアドレス', class: 'col-md-3 control-label'
+      = f.label :email, 'E-mail', class: 'col-md-3 control-label'
       .col-md-5
         = f.text_field :email, autofocus: true, class: 'form-control'
     .form-group
-      = f.label :password, 'パスワード', class: 'col-md-3 control-label'
+      = f.label :password, 'Password', class: 'col-md-3 control-label'
       .col-md-5
         = f.password_field :password, autocomplete: 'off', class: 'form-control'
     .form-group
-      = f.label :password_confirmation, 'パスワード (確認)', class: 'col-md-3 control-label'
+      = f.label :password_confirmation, 'Verify Password', class: 'col-md-3 control-label'
       .col-md-5
         = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
     .form-group
       .col-md-offset-3.col-md-5
-        = f.submit '登録', class: 'btn btn-primary'
+        = f.submit 'Sign up', class: 'btn btn-primary'

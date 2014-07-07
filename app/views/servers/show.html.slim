@@ -1,27 +1,27 @@
-- @title = "サーバの詳細情報"
+- @title = "#{@server.ip_address} graphs"
 
 h3.bold #{@title}
 
 .row
   .col-md-3
     .graph-area
-      h4.bold.center ロードアベレージ
+      h4.bold.center Load Average
       - if @load_average.nil?
-        h4.center.text-danger エラー
+        h4.center.text-danger Error
       - else
         = high_chart 'load_average', @load_average
   .col-md-3
     .graph-area
-      h4.bold.center メモリー使用率
+      h4.bold.center Memory usage
       - if @memory_usage.nil?
-        h4.center.text-danger エラー
+        h4.center.text-danger Error
       - else
         = high_chart 'memory_usage', @memory_usage
   .col-md-3
     .graph-area
-      h4.bold.center 消費電力予測
+      h4.bold.center Power consumption
       - if @power_usage.nil?
-        h4.center.text-danger エラー
+        h4.center.text-danger Error
       - else
         = high_chart 'power_usage', @power_usage
   .col-md-3
@@ -29,17 +29,17 @@ h3.bold #{@title}
       table.table.table-condensed.table-bordered
         tbody
           tr
-            th IPアドレス
-            td #{@server.ip_address}
+            th IP address
+            td.middle #{@server.ip_address}
           tr
-            th コミュニティ名
-            td #{@server.community}
+            th Community name
+            td.middle #{@server.community}
           tr
-            th 最大CPUコア数
-            td #{@server.max_cpu_core}
+            th Max CPU cores
+            td.middle #{@server.max_cpu_core}
           tr
-            th 割当CPUコア数
-            td #{@server.assign_cpu_core}
+            th Assigned CPU cores
+            td.middle #{@server.assign_cpu_core}
           tr
-            th CPU TDP
-            td #{@server.cpu_tdp}W
+            th CPU TD.MIDDLEP
+            td.middle #{@server.cpu_tdp} W

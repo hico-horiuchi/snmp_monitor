@@ -1,13 +1,13 @@
-- @title = 'ようこそ'
+- @title = 'Welcome'
 
 .row
   .col-md-6
-    h1.bold Monitorへようこそ
+    h1.bold Welcome to Monitor.
     h4.bold
       br
-      | MonitorはSNMPを「見える化」するツールです。
+      | Monitor is visualization tool for SNMP.
       br
-      | サーバのCPUやメモリの使用率をグラフ化します。
+      | You can see in the graph, such as CPU usage, memory usage and etc... on the server.
       br
     = image_tag 'graph_image.png', class: 'img-responsive'
 
@@ -16,10 +16,10 @@
     .well
       = form_for :user, url: { controller: 'devise/sessions', action: 'new' }, html: { class: 'form' } do |f|
         .form-group
-          = f.text_field :email, autofocus: true, class: 'form-control', placeholder: 'メールアドレス'
+          = f.text_field :email, autofocus: true, class: 'form-control', placeholder: 'E-mail'
         .form-group
-          = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'パスワード'
+          = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password'
         .form-group
-          = f.submit 'ログイン', class: 'btn btn-info'
+          = f.submit 'Sign in', class: 'btn btn-info'
           | &nbsp;
-          = link_to '新規登録', new_registration_path(:user), class: 'btn btn-default'
+          = link_to 'Sign up', new_registration_path(:user), class: 'btn btn-default'

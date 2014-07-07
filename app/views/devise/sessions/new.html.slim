@@ -1,19 +1,19 @@
-- @title = 'ログイン'
+- @title = 'Sign in'
 
 h3.bold #{@title}
 
 .well
   = form_for resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' } do |f|
     .form-group
-      = f.label :email, 'メールアドレス', class: 'col-md-3 control-label'
+      = f.label :email, 'E-mail', class: 'col-md-3 control-label'
       .col-md-5
         = f.text_field :email, autofocus: true, class: 'form-control'
     .form-group
-      = f.label :password, 'パスワード', class: 'col-md-3 control-label'
+      = f.label :password, 'Password', class: 'col-md-3 control-label'
       .col-md-5
         = f.password_field :password, autocomplete: 'off', class: 'form-control'
     .form-group
       .col-md-offset-3.col-md-5
-        = f.submit 'ログイン', class: 'btn btn-info'
+        = f.submit 'Sign in', class: 'btn btn-info'
         | &nbsp;
-        = link_to '新規登録', new_registration_path(:user), class: 'btn btn-default'
+        = link_to 'Sign up', new_registration_path(:user), class: 'btn btn-default'

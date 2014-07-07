@@ -1,14 +1,14 @@
-- @title = 'サーバ管理'
+- @title = 'Servers'
 
 h3.bold.float-left #{@title}
 
 = link_to new_server_path, class: 'btn btn-primary btn-sm btn-new', remote: true do
   span.glyphicon.glyphicon-plus
-  | &nbsp;新規登録
+  | &nbsp;New server
 
 p.float-clear
 
 - if @servers.empty?
-  p サーバが登録されていません。
+  p No server is registered.
 - else
   = render partial: 'servers/list'

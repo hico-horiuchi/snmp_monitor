@@ -1,5 +1,5 @@
 <% if @server %>
   location.reload( true )
 <% else %>
-  alert( '更新できませんでした。' )
+  alert( 'Could not save changes.' )
 <% end %>

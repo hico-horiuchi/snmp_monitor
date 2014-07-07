@@ -6,6 +6,7 @@ html
     = stylesheet_link_tag    'application', 'data-turbolinks-track' => true, media: 'all'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    link href="http://fonts.googleapis.com/css?family=Exo:500" rel="stylesheet" type="text/css"
 
   body
     .modal-form
@@ -19,7 +20,7 @@ html
             span.icon-bar
             span.icon-bar
           = link_to root_path, class: "navbar-brand" do
-            = image_tag 'logo.png', class: 'navbar-logo'
+            | Monitor
 
         .collapse.navbar-collapse id="bs-example-navbar-collapse-1"
           - if current_user
@@ -27,21 +28,21 @@ html
               li
                 = link_to servers_path do
                   span.glyphicon.glyphicon-hdd
-                  | &nbsp;サーバ
+                  | &nbsp;Servers
             ul.nav.navbar-nav.navbar-right
               li.dropdown
                 a.dropdown-toggle href="#" data-toggle="dropdown"
                   span.glyphicon.glyphicon-user
-                  | &nbsp;アカウント&nbsp;
+                  | &nbsp;Account&nbsp;
                   b.caret
                 ul.dropdown-menu
                   li
                     = link_to edit_user_registration_path do
                       span.glyphicon.glyphicon-pencil
-                      | &nbsp;編集
+                      | &nbsp;Edit
                     = link_to destroy_user_session_path, method: :delete
                       span.glyphicon.glyphicon-log-out
-                      | &nbsp;ログアウト
+                      | &nbsp;Sign out
 
     .container
       - if notice

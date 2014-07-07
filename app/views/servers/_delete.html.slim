@@ -1,12 +1,12 @@
-- @title = '削除'
+- @title = 'Delete Server'
 
 - modal_body = capture do
   p
-    | サーバ「#{@server.ip_address}」を削除しますか?
+    | Are you sure delete server "#{@server.ip_address}" ?
 
 - modal_footer = capture do
   = link_to server_path(@server.id), class: 'btn btn-danger', remote: true, method: :delete do
-    | 削除
-  = content_tag :button, 'キャンセル', class: 'btn btn-default', 'data-dismiss' => 'modal'
+    | Delete server
+  = content_tag :button, 'Cancel', class: 'btn btn-default', 'data-dismiss' => 'modal'
 
 = modal_dialog :id => 'modal-form', :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer

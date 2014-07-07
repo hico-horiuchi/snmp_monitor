@@ -23,3 +23,7 @@
        url('/assets/glyphicons-halflings-regular.ttf') format('truetype'),
        url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
+
+body, h1, h2, h3, h4, text {
+  font-family: 'Exo', sans-serif !important;
+}

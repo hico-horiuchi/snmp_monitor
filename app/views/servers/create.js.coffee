@@ -1,5 +1,5 @@
 <% if @server %>
   location.reload( true )
 <% else %>
-  alert( '登録できませんでした。' )
+  alert( 'Could not register server.' )
 <% end %>

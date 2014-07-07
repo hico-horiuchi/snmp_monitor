@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/hico-horiuchi/snmp_monitor.svg?branch=master)](https://travis-ci.org/hico-horiuchi/snmp_monitor)
 
-MonitorはSNMPを「見える化」するツールです。
+Monitor is visualization tool for SNMP.
 <br>
-サーバのCPUやメモリの使用率をグラフ化します。
+You can see in the graph, such as CPU usage, memory usage and etc... on the server.
 
 <a href="https://raw.githubusercontent.com/hico-horiuchi/snmp_monitor/master/screenshots/servers_list.jpg">
   <img src="/../master/screenshots/servers_list.jpg" width="320px" height="auto">

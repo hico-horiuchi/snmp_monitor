@@ -6,9 +6,10 @@ module MonitorTool
   def get_load_average
     la_load_1 = 0
     begin
-      response = @manager.get( ['1.3.6.1.4.1.2021.10.1.3.1'] )
-      response.each_varbind { |vb| la_load_1 = vb.value.to_f }
-      la_load_1 > @server.assign_cpu_core ? 1.0 : la_load_1
+      # response = @manager.get( ['1.3.6.1.4.1.2021.10.1.3.1'] )
+      # response.each_varbind { |vb| la_load_1 = vb.value.to_f }
+      # la_load_1 > @server.assign_cpu_core ? 1.0 : la_load_1
+      rand 0.0...0.3
     rescue SNMP::RequestTimeout, NoMethodError
       nil
     end

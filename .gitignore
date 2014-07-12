@@ -16,9 +16,10 @@
 /log/*.log
 /tmp
 
+# Ignore editor swap files.
 *~
 .*.swp
 *#*
 
-# for indivisual db setting
-config/database.yml
+# Ignore indivisual DB setting.
+/config/database.yml
